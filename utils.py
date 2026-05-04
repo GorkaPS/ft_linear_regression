@@ -3,7 +3,6 @@
 def estimate_price(theta0, theta1, km):
 	result = theta0 + (theta1 * km)
 	return result
-	
 
 
 

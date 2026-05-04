@@ -2,7 +2,8 @@
 
 import csv
 import json
-from utils import estimate_price 
+from utils import estimate_price
+from bonus import calculate_precision, create_graph
 
 def main():
 
@@ -10,12 +11,12 @@ def main():
 	
 	theta0 = 0
 	theta1 = 0
-	learningrate = 0.0001
+	learningrate = 0.00015
 	with open('data.csv', 'r') as file:
 		reader = csv.DictReader(file)
 		for row in reader:
 			data.append((float(row['km']) / 1000, float(row['price'])))
-	for n in range(300000):
+	for n in range(600000):
 		errortheta0 = 0
 		errortheta1 = 0
 		for mileage, price in data:
@@ -36,6 +37,8 @@ def main():
 		print(f"Error: sin permisos para {'thetas.json'}")
 		return
 	print("Archivo JSON generado correctamente")
+	create_graph(data, theta0, theta1)
+	calculate_precision(data, theta0, theta1)
 
 if __name__ == "__main__":
 	main()
